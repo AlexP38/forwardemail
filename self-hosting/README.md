@@ -127,6 +127,9 @@ The `docker-compose-self-hosted.yml` file defines all the services required for 
 
 Each service uses the same Docker image but with different entry points, allowing for a modular architecture while simplifying maintenance.
 
+### Optional Configuration
+
+You may need to set `BLOCK_LOCAL_ADDRESSES` environmental variable to `false` in order to be able to send an receive mails e.g. from one mailbox to another within the same host. Otherwise you may get the error message in the logs: `The resolved IP address corresponds to a local interface.`. This is due to the dnsOption in the nom package mx-connect being otherwise set to refuse to connect to IP Adresses that are in loopback, private network or attached to the server. There is a risk though to flood your loopback interface if someone sets his MX record (for whatever reason) to 127.0.0.1 and you happen to try to send a mail to this mx record. 
 
 ## Maintenance Features
 

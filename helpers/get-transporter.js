@@ -231,7 +231,7 @@ async function getTransporter(options = {}, err) {
       maxConnectTime,
       dnsOptions: {
         // NOTE: if we merge code then this will need adjusted
-        blockLocalAddresses: env.NODE_ENV !== 'test',
+        blockLocalAddresses: env.NODE_ENV === 'test' ? false : env.BLOCK_LOCAL_ADDRESSES,
         // <https://github.com/zone-eu/mx-connect/pull/4>
         resolve: callbackify(resolver.resolve.bind(resolver))
       },
